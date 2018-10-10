@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter , Route} from 'react-router-dom';
+import { fire, getFireDB } from './shared/Firebase';
+import FirstPage from './Firstpage';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      memo: []
+    };
+    fire();
+  }
 
-    state = { username: null };
-
-    componentDidMount() {
-        fetch('/api/getUsername')
-            .then(res => res.json())
-            .then(user => this.setState({ username: user.username }));
-    }
+  componentDidMount() {
+    getFireDB()
+    .then(res =>{
+      this.setState({
+        memo : res.val().memos
+      })
+    });
+  }
 
   render() {
-    const { username } = this.state;
+    const { memo } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <BrowserRouter>
           <div>
-              {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
+            <Route exact path="/" render={()=><FirstPage memo={memo}/>}/>
           </div>
+        </BrowserRouter>
       </div>
     );
   }
