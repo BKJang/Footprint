@@ -1,12 +1,12 @@
 import * as firebase from 'firebase'
 let database;
 let config = {
-    apiKey: "AIzaSyBa1yFvsl0j1k3SNDPX-DcW5xtXjQPtPEg",
+    apiKey: "",
     authDomain: "footprint-a164a.firebaseapp.com",
-    databaseURL: "https://footprint-a164a.firebaseio.com",
-    projectId: "footprint-a164a",
-    storageBucket: "footprint-a164a.appspot.com",
-    messagingSenderId: "632771076490"
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
 }
 
 export const fire = () => {
